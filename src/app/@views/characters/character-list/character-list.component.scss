@@ -1,0 +1,33 @@
+@import "src/styles/variables";
+@import "src/styles/mixins";
+
+.characters-gallery {
+  display: grid;
+  grid-gap: $margin-base;
+
+  @include media($to: tbl-l) {
+    grid-template-areas:
+      'title'
+      'results';
+  }
+
+  @include media($from: tbl-l) {
+    grid-template-columns: 25%;
+    grid-template-areas:
+      'title title'
+      '. results';
+  }
+
+  &__title {
+    font-size: $font-size-title;
+    grid-area: title;
+    margin: $margin-base 0;
+    text-transform: uppercase;
+  }
+  &__results {
+    display: flex;
+    grid-area: results;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+}

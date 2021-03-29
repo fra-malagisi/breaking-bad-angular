@@ -1,0 +1,10 @@
+/* You can add global styles to this file, and also import other style files */
+@import 'styles/reset';
+@import 'styles/variables';
+
+body {
+  background-color: $color-background-primary;
+  font-family: $font-family;
+  font-size: $font-size-base;
+  color: $font-color-primary;
+}

@@ -1,0 +1,30 @@
+@import 'src/styles/variables';
+@import 'src/styles/mixins';
+
+.character-card {
+  $width-image-small: 125px;
+  $width-image: 200px;
+  $height-image: 300px;
+
+  @include media($to: tbl-l) {
+    --width-image: #{$width-image};
+  }
+  @include media($from: tbl-l) {
+    --width-image: #{$width-image};
+  }
+
+  border: 1px solid black;
+  border-radius: $border-radius;
+  margin: $margin-base ;
+  padding: $padding-base;
+  // max-width: calc(var(--width-image) + #{$padding-base * 2 + $border-width * 2});
+
+  &__image {
+    width: 200px;
+    height: 300px;
+  }
+
+  &__figcaption {
+    @include visually-hidden;
+  }
+}

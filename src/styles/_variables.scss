@@ -1,0 +1,57 @@
+$border-radius: 8px;
+$border-width: 1px;
+$margin-base: 16px;
+$padding-base: 16px;
+$transition-effect: ease;
+$transition-speed: 250ms;
+$width-max-text: 60ch;
+$width-max-page: 1440px;
+$width-min-clickable: 48px;
+
+// region BREAKPOINTS
+$breakpoints: (
+  tbl-p: 768px,
+  tbl-l: 1024px,
+  dsk: 1280px,
+);
+// endregion BREAKPOINTS
+
+// region COLORS
+// --- do NOT use the following: ---
+$black-opacity-half: rgba(0, 0, 0, 0.5);
+$dark-green: #093009;
+$pamona-green: #1F6032;
+$dark-spring-green: #29773E;
+$sea-green: #369457;
+$pantone: #032202;
+$green: #55cc44;
+$red: #d63d2e;
+
+// --- instead USE these ones: ---
+$color-primary: $sea-green;
+$color-secondary: $dark-green;
+$color-tertiary: $pamona-green;
+
+$color-background-primary: $color-primary;
+$color-background-secondary: $color-secondary;
+$color-background-tertiary: $color-tertiary;
+
+$color-box-shadow: $black-opacity-half;
+
+$color-error: $red;
+$color-success: $green;
+// endregion COLORS
+
+// region TYPOGRAPHY
+$font-family: 'Lato', sans-serif;
+$font-size-base: 1rem;
+$font-size-small: 0.8rem;
+$font-size-subtitle: 1.5rem;
+$font-size-title: 2rem;
+$font-color-primary: $pantone;
+// endregion TYPOGRAPHY
+
+// region Z-INDEXES
+$z-index-header: 2;
+$z-index-modal: 3;
+// endregion Z-INDEXES

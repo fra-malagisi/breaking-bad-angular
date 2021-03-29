@@ -1,0 +1,32 @@
+@import "src/styles/variables";
+@import "src/styles/mixins";
+
+.header {
+  $height-header: 100px;
+  $padding-header: $padding-base;
+
+  height: $height-header;
+  padding: $padding-header;
+  text-align: left;
+  z-index: $z-index-header;
+  background-color: $color-background-secondary;
+
+  &__figure {
+    display: inline-block;
+  }
+
+  &__figcaption {
+    @include visually-hidden;
+  }
+
+  &__logo {
+    height: calc(#{$height-header} - #{$padding-header * 2});
+    stroke: $color-secondary;
+    stroke-opacity: 0.8;
+    stroke-width: 2px;
+  }
+
+  &__title {
+    @include visually-hidden;
+  }
+}

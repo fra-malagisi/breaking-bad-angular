@@ -1,0 +1,43 @@
+@import "variables";
+
+@mixin max-width() {
+  margin: 0 auto;
+  max-width: $width-max-page;
+}
+
+@mixin visually-hidden() {
+  &:not(:focus):not(:active) {
+    clip: rect(1px, 1px, 1px, 1px);
+    height: 1px;
+    overflow: hidden;
+    position: absolute;
+    white-space: nowrap;
+    width: 1px;
+  }
+}
+
+@mixin no-btn-style() {
+  background: transparent;
+  border: 0 solid transparent;
+}
+
+@mixin media($from: null, $to: null) {
+  $from: map-get($breakpoints, $from);
+  $to: map-get($breakpoints, $to);
+
+  @if $from and $to {
+    @media (min-width: $from) and (max-width: $to - 1px) {
+      @content;
+    }
+  } @else if $from {
+    @media (min-width: $from) {
+      @content;
+    }
+  } @else if $to {
+    @media (max-width: $to - 1px) {
+      @content;
+    }
+  } @else {
+    @content;
+  }
+}

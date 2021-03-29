@@ -1,0 +1,24 @@
+<nav aria-label="Main Navigation" class="sidenav" [style.width]="isOpen ? '14rem' : '2rem'">
+  <button class="sidenav__button" (click)="toggle()">
+    <i class="fas sidenav__button-icon" tabindex="-1" [ngClass]="{
+    'fa-arrow-right': !isOpen,
+    'fa-arrow-left': isOpen
+    }"></i>
+  </button>
+  <ul *ngIf="isOpen" class="sidenav__list">
+    <li class="sidenav__list-item" *ngFor="let menuItem of menuStructure">
+      <button class="sidenav__list-item__button" [routerLink]="menuItem.url" [routerLinkActive]="['sidenav__list-item__button--active']">
+        <span tabindex="-1" class="sidenav__list-item__button__content">{{menuItem.label}}</span>
+      </button>
+    </li>
+    <!-- <li class="has-submenu">
+      <a href="…" aria-haspopup="true" aria-expanded="false">
+        Space Bears
+      </a>
+      <ul>
+        <li><a href="…">Space Bear 6</a></li>
+        <li><a href="…">Space Bear 6 Plus</a></li>
+      </ul>
+    </li> -->
+  </ul>
+</nav>

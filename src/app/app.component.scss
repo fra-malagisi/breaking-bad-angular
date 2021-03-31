@@ -1,13 +1,27 @@
+@import "src/styles/mixins";
+
 :host {
   display: flex;
+  min-height: 100%;
   flex-direction: column;
-  min-height: 100vh;;
 }
 
 .content {
-  padding: 2rem 3rem;
+
+  @include media($to: tbl-l) {
+    padding: 0.5rem 0.5rem;
+  }
+
+  @include media($from: tbl-l) {
+    padding: 2rem 3rem;
+  }
 }
 
 .main {
   display: flex;
+
+  @include media($to: tbl-l) {
+    flex-direction: column;
+  }
+  min-height: 100%;
 }

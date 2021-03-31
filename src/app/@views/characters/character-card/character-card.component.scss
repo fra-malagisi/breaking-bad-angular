@@ -17,11 +17,23 @@
   border-radius: $border-radius;
   margin: $margin-base ;
   padding: $padding-base;
-  // max-width: calc(var(--width-image) + #{$padding-base * 2 + $border-width * 2});
+  background-color: $color-background-tertiary;
+
+  &__header {
+    text-align: center;
+  }
+
+  &__title {
+    color: white;
+    font-weight: bold;
+    text-transform: uppercase;
+    margin-bottom: $margin-base;
+  }
 
   &__image {
     width: 200px;
     height: 300px;
+    border: solid 1px black;
   }
 
   &__figcaption {

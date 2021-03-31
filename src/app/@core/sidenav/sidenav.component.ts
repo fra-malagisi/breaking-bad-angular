@@ -9,8 +9,7 @@ import {ISidenav} from './sidenav.interface';
 export class SidenavComponent {
 
   @Input() menuStructure: ISidenav[] = [];
-
-  public isOpen = false;
+  @Input() isOpen = false;
 
   toggle(): void {
     this.isOpen = !this.isOpen;

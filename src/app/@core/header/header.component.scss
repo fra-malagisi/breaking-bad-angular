@@ -10,6 +10,9 @@
   text-align: left;
   z-index: $z-index-header;
   background-color: $color-background-secondary;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 
   &__figure {
     display: inline-block;
@@ -28,5 +31,23 @@
 
   &__title {
     @include visually-hidden;
+  }
+
+  &__button {
+    @include no-btn-style;
+    border-radius: $border-radius;
+    padding: $padding-base;
+    background-color: $color-background-tertiary;
+    border: solid 1px black;
+    @include media($from: tbl-l) {
+      @include visually-hidden
+    }
+    &:active {
+      background-color: $color-primary;
+      color: white;
+    }
+    &-icon:focus {
+      outline: none;
+    }
   }
 }

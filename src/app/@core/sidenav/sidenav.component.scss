@@ -2,18 +2,44 @@
 @import "src/styles/mixins";
 
 .sidenav {
-  height: 100vh;
-  width: 2rem; /* 0 width - change this with JavaScript */
-  position: sticky; /* Stay in place */
+
+  @include media($from: tbl-l) {
+    height: 100vh;
+    padding-top: $padding-base * 4;
+  }
+
+  position: sticky;
   z-index: 1;
   bottom: 0;
   left: 0;
   top: 0;
   background-color: $color-background-tertiary;
   overflow-x: hidden;
-  padding-top: $padding-base * 4;
   transition: 0.5s;
+
+  &--open {
+
+    @include media($from: tbl-l) {
+      width: 14rem;
+    }
+
+  }
+
+  &--closed {
+
+    @include media($to: tbl-l) {
+      display: none;
+    }
+
+    @include media($from: tbl-l) {
+      width: 2rem;
+    }
+  }
+
   &__button {
+    @include media($to: tbl-l) {
+      @include visually-hidden;
+    }
     background: none;
     color: white;
     border: none;

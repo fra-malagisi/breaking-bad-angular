@@ -8,4 +8,5 @@ import {SidenavMenu} from './@costants/sidenav.const';
 })
 export class AppComponent {
   sidenavMenu = SidenavMenu;
+  public isSidenavExpanded = false;
 }

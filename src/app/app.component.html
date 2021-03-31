@@ -1,6 +1,6 @@
-<bb-fm-header></bb-fm-header>
+<bb-fm-header (buttonClicked)="isSidenavExpanded = !isSidenavExpanded"></bb-fm-header>
 <main class="main">
-  <bb-fm-sidenav [menuStructure]="sidenavMenu"></bb-fm-sidenav>
+  <bb-fm-sidenav [menuStructure]="sidenavMenu" [isOpen]="isSidenavExpanded"></bb-fm-sidenav>
   <div class="content">
     <router-outlet></router-outlet>
   </div>

@@ -2,41 +2,77 @@
 @import 'src/styles/mixins';
 
 .character-card {
-  $width-image-small: 125px;
-  $width-image: 200px;
-  $height-image: 300px;
 
-  @include media($to: tbl-l) {
-    --width-image: #{$width-image};
-  }
-  @include media($from: tbl-l) {
-    --width-image: #{$width-image};
-  }
-
+  display: flex;
+  flex-direction: column;
   border: 1px solid black;
   border-radius: $border-radius;
   margin: $margin-base ;
   padding: $padding-base;
-  background-color: $color-background-tertiary;
+  background-color: $white;
+
+  @include box-shadow($v-offset: 0, $spread-radius: 0);
+
+  @include media($to: tbl-l) {
+    margin: $margin-base 0;
+  }
 
   &__header {
     text-align: center;
   }
 
   &__title {
-    color: white;
     font-weight: bold;
     text-transform: uppercase;
     margin-bottom: $margin-base;
   }
 
   &__image {
-    width: 200px;
-    height: 300px;
+    object-fit: cover;
+    object-position: top;
+    width: 100px;
+    height: 200px;
     border: solid 1px black;
   }
 
   &__figcaption {
     @include visually-hidden;
+  }
+
+  &__content {
+    display: flex;
+  }
+
+  &__info {
+    padding: 0 $padding-base;
+    display: flex;
+    flex-direction: column;
+    &__label {
+      margin-right: $margin-base / 2;
+      font-weight: bold;
+    }
+    &__detail {
+      margin-bottom: $margin-base / 2;
+      display: flex;
+      align-items: center;
+      &-status-icon {
+        border-radius: 50%;
+        display: inline-block;
+        margin-left: $margin-base / 2;
+        height: $font-size-base / 2;
+        width: $font-size-base / 2;
+        &--alive {
+          background-color: $color-success;
+        }
+
+        &--dead {
+          background-color: $color-error;
+        }
+
+        &--unknown {
+          background-color: $orange;
+        }
+      }
+    }
   }
 }

@@ -1,9 +1,32 @@
 <article class="character-card">
   <header class="character-card__header">
     <h3 class="character-card__title">{{character?.name}}</h3>
+  </header>
+  <div class="character-card__content">
     <figure>
       <img class="character-card__image" [src]="character?.img">
       <figcaption class="character-card__figcaption">{{character?.name}} image</figcaption>
     </figure>
-  </header>
+    <dl class="character-card__info">
+      <dt class="character-card__info__label">Nickname:</dt>
+      <dd class="character-card__info__detail">{{character?.nickname}}</dd>
+      <dt class="character-card__info__label">Occupation:</dt>
+      <dd class="character-card__info__detail">
+        <ul>
+          <li *ngFor="let occupation of character?.occupation; let isLast = last">{{occupation}}{{!isLast ? ', ' : ''}}</li>
+        </ul>
+      </dd>
+      <dt class="character-card__info__label">Birthday:</dt>
+      <dd class="character-card__info__detail">{{character?.birthday}}</dd>
+      <dt class="character-card__info__label">Status:</dt>
+      <dd class="character-card__info__detail"> {{character?.status}}
+        <span class="character-card__info__detail-status-icon" [ngClass]="{
+        'character-card__info__detail-status-icon--alive': character?.status === 'Alive',
+        'character-card__info__detail-status-icon--dead': character?.status === 'Deceased',
+        'character-card__info__detail-status-icon--unknown': character?.status === 'Presumed dead'
+        }">
+        </span>
+      </dd>
+    </dl>
+  </div>
 </article>

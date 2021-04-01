@@ -29,5 +29,10 @@
     grid-area: results;
     justify-content: center;
     flex-wrap: wrap;
+
+    @include media($to: tbl-l) {
+      flex-direction: column;
+      align-items: stretch;
+    }
   }
 }

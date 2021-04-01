@@ -14,6 +14,8 @@
   justify-content: space-between;
   align-items: center;
 
+  @include box-shadow;
+
   &__figure {
     display: inline-block;
   }

@@ -5,6 +5,8 @@
     <figcaption class="header__figcaption">Breaking Bad Logo</figcaption>
   </figure>
   <button class="header__button" (click)="buttonClicked.emit()">
-    <i class="fas fa-bars header__button-icon" tabindex="-1"></i>
+    <fa-icon
+      class="header__button-icon"
+      [icon]="faBars" tabindex="-1"></fa-icon>
   </button>
 </header>

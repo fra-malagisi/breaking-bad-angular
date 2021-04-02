@@ -3,10 +3,9 @@
  'sidenav--closed': !isOpen
 }">
   <button class="sidenav__button" (click)="toggle()">
-    <i class="fas sidenav__button-icon" tabindex="-1" [ngClass]="{
-    'fa-arrow-right': !isOpen,
-    'fa-arrow-left': isOpen
-    }"></i>
+    <fa-icon
+      class="header__button-icon"
+      [icon]="isOpen ? faArrowLeft : faArrowRight" tabindex="-1"></fa-icon>
   </button>
   <ul *ngIf="isOpen" class="sidenav__list">
     <li class="sidenav__list-item" *ngFor="let menuItem of menuStructure">

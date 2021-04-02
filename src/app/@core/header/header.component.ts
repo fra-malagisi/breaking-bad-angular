@@ -1,4 +1,5 @@
 import {Component, Output, EventEmitter} from '@angular/core';
+import { faBars } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'bb-fm-header',
@@ -7,4 +8,5 @@ import {Component, Output, EventEmitter} from '@angular/core';
 })
 export class HeaderComponent {
   @Output() buttonClicked: EventEmitter<void> = new EventEmitter<void>();
+  faBars = faBars;
 }

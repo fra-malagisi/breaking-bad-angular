@@ -3,6 +3,14 @@
 
 .character-card {
 
+  --width-size: 400px;
+  --height-size: 329px;
+
+  @include media($to: tbl-l) {
+    --width-size: 100%;
+    --height-size: 280px;
+  }
+
   display: flex;
   flex-direction: column;
   border: 1px solid black;
@@ -10,7 +18,11 @@
   margin: $margin-base ;
   padding: $padding-base;
   background-color: $white;
-
+  min-width: var(--width-size);
+  max-width: var(--width-size);
+  min-height: var(--height-size);
+  max-height: var(--height-size);
+  height: var(--height-size);
   @include box-shadow($v-offset: 0, $spread-radius: 0);
 
   @include media($to: tbl-l) {
@@ -27,12 +39,20 @@
     margin-bottom: $margin-base;
   }
 
+  &__image-container {
+    height: 100%;
+  }
+
   &__image {
     object-fit: cover;
     object-position: top;
-    width: 100px;
-    height: 200px;
+    width: 200px;
+    height: 100%;
     border: solid 1px black;
+
+    @include media($to: tbl-l) {
+      width: 100px;
+    }
   }
 
   &__figcaption {
@@ -41,6 +61,8 @@
 
   &__content {
     display: flex;
+    height: 90%;
+
   }
 
   &__info {

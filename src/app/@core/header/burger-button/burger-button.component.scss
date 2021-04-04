@@ -1,0 +1,20 @@
+@import "src/styles/variables";
+@import "src/styles/mixins";
+
+.burger-button {
+  @include no-btn-style;
+  border-radius: $border-radius;
+  padding: $padding-base;
+  background-color: $color-background-tertiary;
+  border: solid 1px black;
+  @include media($from: tbl-l) {
+    @include visually-hidden
+  }
+  &:active {
+    background-color: $color-primary;
+    color: white;
+  }
+  &-icon:focus {
+    outline: none;
+  }
+}

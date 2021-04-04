@@ -1,12 +1,8 @@
 <header class="header">
   <h1 class="header__title">Breaking Bad (Component store example)</h1>
   <figure class="header__figure">
-    <img class="header__logo" src="assets/images/Breaking_Bad_logo.svg">
+    <img class="header__logo" src="assets/images/Breaking_Bad_logo.svg" alt="logo">
     <figcaption class="header__figcaption">Breaking Bad Logo</figcaption>
   </figure>
-  <button class="header__button" (click)="buttonClicked.emit()">
-    <fa-icon
-      class="header__button-icon"
-      [icon]="faBars" tabindex="-1"></fa-icon>
-  </button>
+  <bb-fm-burger-button></bb-fm-burger-button>
 </header>

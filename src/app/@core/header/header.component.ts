@@ -6,4 +6,6 @@ import {Component, Output, EventEmitter} from '@angular/core';
   styleUrls: ['header.component.scss']
 })
 export class HeaderComponent {
+  @Output() handleBurgerClicked: EventEmitter<void> = new EventEmitter<void>();
+
 }

@@ -51,10 +51,6 @@ export default {
 
 const Template: Story<CharacterCardComponent> = (args: CharacterCardComponent | any) => {
   const {status} = args;
-  console.log(status);
-  if(status) {
-    console.log(getCharacterWithSelectedStatus(status));
-  }
   return {
     component: CharacterCardComponent,
     props: {

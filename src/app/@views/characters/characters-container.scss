@@ -1,0 +1,35 @@
+@import "src/styles/variables";
+@import "src/styles/mixins";
+
+:host {
+  display: grid;
+  grid-gap: $margin-base;
+
+  @include media($to: tbl-l) {
+    grid-template-areas:
+      'title'
+      'filters'
+      'list';
+  }
+
+  @include media($from: tbl-l) {
+    grid-template-columns: 25%;
+    grid-template-areas:
+      'title title'
+      'filters list';
+  }
+}
+.characters {
+  &__title {
+    font-size: $font-size-title;
+    margin: $margin-base 0;
+    grid-area: title;
+    text-transform: uppercase;
+  }
+  &__list {
+    grid-area: list;
+  }
+  &__filters {
+    grid-area: filters;
+  }
+}

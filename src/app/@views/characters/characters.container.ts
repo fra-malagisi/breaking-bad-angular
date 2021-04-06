@@ -5,7 +5,8 @@ import {ICharacter} from './character.interface';
 
 @Component({
   selector: 'bb-fm-characters',
-  templateUrl: 'characters.container.html'
+  templateUrl: 'characters.container.html',
+  styleUrls: ['characters-container.scss']
 })
 export class CharactersContainer implements OnInit {
 

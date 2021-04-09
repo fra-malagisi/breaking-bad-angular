@@ -45,3 +45,8 @@
 @mixin box-shadow($v-offset: 8px, $spread-radius: 0) {
   box-shadow: 0 $v-offset 8px $spread-radius $color-box-shadow;
 }
+
+@mixin shrink-label {
+  top: -#{$font-size-base};
+  font-size: $font-size-small;
+}

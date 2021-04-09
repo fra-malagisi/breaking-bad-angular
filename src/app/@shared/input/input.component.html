@@ -1,0 +1,9 @@
+<div class="input">
+  <input class="input__field" [id]="id"
+         [(ngModel)]="value"
+         (ngModelChange)="onChange($event)"
+         (focus)="onFocus()"
+         (blur)="onBlur()"
+  />
+  <label class="input__label" [class.input__label--shrink]="isOnFocus || value" [for]="id">{{label}}</label>
+</div>

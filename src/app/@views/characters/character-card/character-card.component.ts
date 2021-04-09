@@ -7,5 +7,5 @@ import {ICharacter} from '../character.interface';
   styleUrls: ['character-card.component.scss']
 })
 export class CharacterCardComponent {
-  @Input() character: ICharacter | undefined;
+  @Input() character!: ICharacter;
 }

@@ -1,0 +1,8 @@
+@import 'src/styles/variables';
+@import 'src/styles/mixins';
+
+.character-filters {
+  &__title {
+    font-size: $font-size-subtitle;
+  }
+}

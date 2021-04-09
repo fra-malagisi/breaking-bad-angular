@@ -1,0 +1,36 @@
+@import "src/styles/variables";
+@import "src/styles/mixins";
+
+.input {
+  margin: $margin-base 0;
+  position: relative;
+
+  &__field {
+    display: block;
+    border: {
+      bottom: $border-width solid $color-primary;
+      right: none;
+      left: none;
+      top: none;
+    }
+    font-size: $font-size-base;
+    padding: $padding-base / 2;
+    width: 100%;
+
+    &:focus,
+    &:active {
+      outline: none;
+      border-bottom: $border-width * 2 solid $color-secondary;
+    }
+  }
+
+  &__label {
+    font-size: $font-size-base;
+    pointer-events: none;
+    transition: $transition-speed $transition-effect all;
+
+    &--shrink {
+       @include shrink-label;
+     }
+  }
+}

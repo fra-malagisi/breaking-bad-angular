@@ -13,7 +13,7 @@
 
   display: flex;
   flex-direction: column;
-  border: 1px solid black;
+  border: $border-width solid black;
   border-radius: $border-radius;
   margin: $margin-base ;
   padding: $padding-base;
@@ -48,7 +48,7 @@
     object-position: top;
     width: 200px;
     height: 100%;
-    border: solid 1px black;
+    border: $border-width solid black;
 
     @include media($to: tbl-l) {
       width: 100px;

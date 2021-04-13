@@ -1,4 +1,4 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, Input} from '@angular/core';
 import {ICharacter} from '../character.interface';
 
 @Component({
@@ -6,10 +6,6 @@ import {ICharacter} from '../character.interface';
   templateUrl: 'character-list.component.html',
   styleUrls: ['character-list.component.scss']
 })
-export class CharacterListComponent implements OnInit{
+export class CharacterListComponent {
   @Input() characters: ICharacter[] = [];
-
-  ngOnInit(): void {
-    console.log(this.characters);
-  }
 }

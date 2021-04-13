@@ -3,7 +3,10 @@
 <ng-container *ngIf="(characters$ | async) as characters">
   <bb-fm-paginator
     class="characters__paginator"
-    [totalItems]="characters.length"></bb-fm-paginator>
+    [totalItems]="totalCharacters"
+    [maxItemPerPage]="charactersPerPage"
+    (onPageChange)="handlePageChange($event)"
+  ></bb-fm-paginator>
   <bb-fm-character-list
     class="characters__list"
     [characters]="characters"></bb-fm-character-list>

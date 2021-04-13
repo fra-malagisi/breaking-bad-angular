@@ -10,7 +10,7 @@ import {catchError, tap} from 'rxjs/operators';
 })
 export class CharacterService {
 
-  private basePath = `${environment.baseUrlApi}characters/`;
+  private basePath = `${environment.baseUrlApi}characters`;
 
   constructor(
     private http: HttpClient

@@ -1,6 +1,5 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, Input, OnInit, Output, EventEmitter} from '@angular/core';
 
-const MAX_ITEMS_PAGE = 4;
 const MAX_SHOWN_PAGES = 3;
 type AddOperation = 'previous' | 'next';
 export type PageArray = string | number;
@@ -11,24 +10,28 @@ export type PageArray = string | number;
   styleUrls: ['paginator.component.scss']
 })
 export class PaginatorComponent implements OnInit {
-  @Input() totalItems!: number;
+  @Input() totalItems = 1;
+  @Input() maxItemPerPage!: number;
+  @Output() onPageChange = new EventEmitter<number>();
   public totalPages!: number;
   public currentPage = 1;
   public previousPages: PageArray[] = [];
-  public nextPages: PageArray[] = [2, 3, 4];
+  public nextPages: PageArray[] = [];
 
   ngOnInit(): void {
     this.setTotalPages();
-  }
-
-  handlePageClick(page: PageArray): void {
-    this.currentPage = page as number;
-    this.setPreviousPages();
     this.setNextPages();
   }
 
   private setTotalPages(): void {
-    this.totalPages =  Math.ceil(this.totalItems / MAX_ITEMS_PAGE);
+    this.totalPages =  Math.ceil(this.totalItems / this.maxItemPerPage);
+  }
+
+  handlePageClick(page: PageArray): void {
+    this.currentPage = page as number;
+    this.onPageChange.emit(this.currentPage);
+    this.setPreviousPages();
+    this.setNextPages();
   }
 
   private setNextPages(): void {

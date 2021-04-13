@@ -1,0 +1,8 @@
+@import "src/styles/variables";
+@import "src/styles/mixins";
+
+.paginator {
+  padding: $padding-base;
+  display: flex;
+  justify-content: center;
+}

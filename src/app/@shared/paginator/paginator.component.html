@@ -1,0 +1,11 @@
+<div class="paginator">
+  <bb-fm-paginator-element *ngFor="let page of previousPages"
+                           [pageNumber]="page"
+                           (onClick)="handlePageClick($event)"
+  ></bb-fm-paginator-element>
+  <bb-fm-paginator-element [pageNumber]="currentPage" [isActive]="true"></bb-fm-paginator-element>
+  <bb-fm-paginator-element *ngFor="let page of nextPages"
+                           [pageNumber]="page"
+                           (onClick)="handlePageClick($event)"
+  ></bb-fm-paginator-element>
+</div>

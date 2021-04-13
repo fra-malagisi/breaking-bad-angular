@@ -1,5 +1,10 @@
 <h2 class="characters__title">Characters</h2>
 <bb-fm-caracter-filter class="characters__filters"></bb-fm-caracter-filter>
-<bb-fm-character-list
-  class="characters__list"
-  *ngIf="(characters$ | async) as characters" [characters]="characters"></bb-fm-character-list>
+<ng-container *ngIf="(characters$ | async) as characters">
+  <bb-fm-paginator
+    class="characters__paginator"
+    [totalItems]="characters.length"></bb-fm-paginator>
+  <bb-fm-character-list
+    class="characters__list"
+    [characters]="characters"></bb-fm-character-list>
+</ng-container>

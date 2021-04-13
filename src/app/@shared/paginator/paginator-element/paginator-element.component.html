@@ -1,0 +1,8 @@
+<div class="paginator-element"
+     [class.paginator-element--clickable]="isNotDotsOrActive()"
+     [class.paginator-element--active]="isActive"
+     [class.paginator-element--dots]="isDots()"
+     (click)="isNotDotsOrActive() && onClick.emit(pageNumber)"
+>
+  {{pageNumber}}
+</div>

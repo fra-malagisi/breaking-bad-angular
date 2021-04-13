@@ -8,6 +8,7 @@
   @include media($to: tbl-l) {
     grid-template-areas:
       'title'
+      'paginator'
       'filters'
       'list';
   }
@@ -15,7 +16,7 @@
   @include media($from: tbl-l) {
     grid-template-columns: 25%;
     grid-template-areas:
-      'title title'
+      'title paginator'
       'filters list';
   }
 }
@@ -31,5 +32,8 @@
   }
   &__filters {
     grid-area: filters;
+  }
+  &__paginator {
+    grid-area: paginator;
   }
 }

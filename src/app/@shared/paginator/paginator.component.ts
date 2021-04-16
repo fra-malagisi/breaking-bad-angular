@@ -1,6 +1,5 @@
 import {ChangeDetectionStrategy, ChangeDetectorRef, Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {BreakpointObserver, Breakpoints} from '@angular/cdk/layout';
-import {noop} from 'rxjs';
 import {tap} from 'rxjs/operators';
 
 type AddOperation = 'previous' | 'next';

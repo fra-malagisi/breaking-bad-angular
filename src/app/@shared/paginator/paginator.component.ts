@@ -1,6 +1,7 @@
-import {ChangeDetectionStrategy, ChangeDetectorRef, Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
+import {ChangeDetectionStrategy, ChangeDetectorRef, Component, EventEmitter, Input, OnDestroy, OnInit, Output} from '@angular/core';
 import {BreakpointObserver, Breakpoints} from '@angular/cdk/layout';
-import {tap} from 'rxjs/operators';
+import {takeUntil, tap} from 'rxjs/operators';
+import {noop, Subject} from 'rxjs';
 
 type AddOperation = 'previous' | 'next';
 export type PageArray = string | number;
@@ -12,7 +13,7 @@ export type PageArray = string | number;
   styleUrls: ['paginator.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class PaginatorComponent implements OnInit {
+export class PaginatorComponent implements OnInit, OnDestroy {
   @Input() totalItems = 1;
   @Input() maxItemPerPage!: number;
   @Input() currentPage = 1;
@@ -21,6 +22,7 @@ export class PaginatorComponent implements OnInit {
   public previousPages: PageArray[] = [];
   public nextPages: PageArray[] = [];
   private maxShownPages = 3;
+  private _onDestroy$ = new Subject();
 
   constructor(
     private breakpointObserver: BreakpointObserver,
@@ -28,15 +30,19 @@ export class PaginatorComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
+    this.setTotalPages();
     this.breakpointObserver.observe([Breakpoints.Handset]).pipe(
+      takeUntil(this._onDestroy$),
      tap(({matches}) => {
        this.maxShownPages = matches ? 1 : 3;
        this.setPages();
        this.cdRef.detectChanges();
      })
-    ).subscribe(console.log);
-    this.setTotalPages();
-    this.setPages();
+    ).subscribe(noop);
+  }
+
+  ngOnDestroy(): void {
+    this._onDestroy$.next();
   }
 
   setPages(): void {
@@ -46,6 +52,7 @@ export class PaginatorComponent implements OnInit {
   }
 
   private setTotalPages(): void {
+    debugger
     this.totalPages =  Math.ceil(this.totalItems / this.maxItemPerPage);
   }
 
@@ -93,6 +100,7 @@ export class PaginatorComponent implements OnInit {
     if (this.isStartOrEnd(type, current)) {
       return current;
     }
+    debugger
     return type === 'next' ? [...current, '...', this.totalPages] : [1, '...', ...current];
   }
 

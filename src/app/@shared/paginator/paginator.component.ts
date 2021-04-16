@@ -1,4 +1,4 @@
-import {Component, Input, OnInit, Output, EventEmitter} from '@angular/core';
+import {ChangeDetectionStrategy, Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 
 const MAX_SHOWN_PAGES = 3;
 type AddOperation = 'previous' | 'next';
@@ -7,7 +7,8 @@ export type PageArray = string | number;
 @Component({
   selector: 'bb-fm-paginator',
   templateUrl: 'paginator.component.html',
-  styleUrls: ['paginator.component.scss']
+  styleUrls: ['paginator.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class PaginatorComponent implements OnInit {
   @Input() totalItems = 1;

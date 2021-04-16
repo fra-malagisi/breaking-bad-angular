@@ -1,11 +1,12 @@
-import {Component, Input} from '@angular/core';
+import {ChangeDetectionStrategy, Component, Input} from '@angular/core';
 import {ISidenav} from './sidenav.interface';
-import { faArrowRight, faArrowLeft } from '@fortawesome/free-solid-svg-icons';
+import {faArrowLeft, faArrowRight} from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'bb-fm-sidenav',
   templateUrl: 'sidenav.component.html',
-  styleUrls: ['sidenav.component.scss']
+  styleUrls: ['sidenav.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class SidenavComponent {
 

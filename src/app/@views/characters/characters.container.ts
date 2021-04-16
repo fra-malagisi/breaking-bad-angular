@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {ChangeDetectionStrategy, Component, OnInit} from '@angular/core';
 import {CharacterService} from '../../@services/character.service';
 import {combineLatest, Observable} from 'rxjs';
 import {ActivatedRoute, Params, Router} from '@angular/router';
@@ -8,7 +8,8 @@ import {ICharacter} from './character.interface';
 @Component({
   selector: 'bb-fm-characters',
   templateUrl: 'characters.container.html',
-  styleUrls: ['characters-container.scss']
+  styleUrls: ['characters-container.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class CharactersContainer implements OnInit {
 

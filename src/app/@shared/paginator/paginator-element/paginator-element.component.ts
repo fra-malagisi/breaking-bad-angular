@@ -1,10 +1,11 @@
-import {Component, Input, Output, EventEmitter} from '@angular/core';
+import {ChangeDetectionStrategy, Component, EventEmitter, Input, Output} from '@angular/core';
 import {PageArray} from '../paginator.component';
 
 @Component({
   selector: 'bb-fm-paginator-element',
   templateUrl: 'paginator-element.component.html',
-  styleUrls: ['paginator-element.component.scss']
+  styleUrls: ['paginator-element.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class PaginatorElementComponent {
 

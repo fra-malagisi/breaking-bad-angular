@@ -1,10 +1,11 @@
-import {Component, OnInit} from '@angular/core';
+import {ChangeDetectionStrategy, Component, OnInit} from '@angular/core';
 import {FormBuilder, FormGroup} from '@angular/forms';
 
 @Component({
   selector: 'bb-fm-caracter-filter',
   templateUrl: 'character-filters.component.html',
-  styleUrls: ['character-filters.component.scss']
+  styleUrls: ['character-filters.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class CharacterFiltersComponent implements OnInit {
 

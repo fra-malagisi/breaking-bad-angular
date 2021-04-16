@@ -16,6 +16,7 @@ export class CharactersContainer implements OnInit {
   public characters$: Observable<ICharacter[]> | undefined;
   public totalCharacters!: number;
   public charactersPerPage = 4;
+  public currentPage !: number;
 
   constructor(
     private characterService: CharacterService,
@@ -28,7 +29,11 @@ export class CharactersContainer implements OnInit {
       this.characterService.getAllCharacters().pipe(shareReplay()),
       this.activatedRoute.queryParams
     ]).pipe(
-      tap(([characters, {page}]) => this.totalCharacters = characters.length),
+      tap(([characters, {page}]) => {
+        this.totalCharacters = characters.length;
+        this.currentPage = page ?? 1;
+        this.currentPage = Number.parseInt(this.currentPage.toString(), 10);
+      }),
        map(([characters, {page}]) => this.getCharactersForPage(characters, page))
     );
   }

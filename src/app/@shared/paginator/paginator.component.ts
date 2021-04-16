@@ -1,8 +1,11 @@
-import {ChangeDetectionStrategy, Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
+import {ChangeDetectionStrategy, ChangeDetectorRef, Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
+import {BreakpointObserver, Breakpoints} from '@angular/cdk/layout';
+import {noop} from 'rxjs';
+import {tap} from 'rxjs/operators';
 
-const MAX_SHOWN_PAGES = 3;
 type AddOperation = 'previous' | 'next';
 export type PageArray = string | number;
+
 
 @Component({
   selector: 'bb-fm-paginator',
@@ -13,14 +16,33 @@ export type PageArray = string | number;
 export class PaginatorComponent implements OnInit {
   @Input() totalItems = 1;
   @Input() maxItemPerPage!: number;
+  @Input() currentPage = 1;
   @Output() onPageChange = new EventEmitter<number>();
   public totalPages!: number;
-  public currentPage = 1;
   public previousPages: PageArray[] = [];
   public nextPages: PageArray[] = [];
+  private maxShownPages = 3;
+
+  constructor(
+    private breakpointObserver: BreakpointObserver,
+    private cdRef: ChangeDetectorRef
+  ) {}
 
   ngOnInit(): void {
+    this.breakpointObserver.observe([Breakpoints.Handset]).pipe(
+     tap(({matches}) => {
+       this.maxShownPages = matches ? 1 : 3;
+       this.setPages();
+       this.cdRef.detectChanges();
+     })
+    ).subscribe(console.log);
     this.setTotalPages();
+    this.setPages();
+  }
+
+  setPages(): void {
+    this.setEmptyPages();
+    this.setPreviousPages();
     this.setNextPages();
   }
 
@@ -29,19 +51,21 @@ export class PaginatorComponent implements OnInit {
   }
 
   handlePageClick(page: PageArray): void {
-    this.currentPage = page as number;
+    this.currentPage = Number.parseInt(page as string, 10);
     this.onPageChange.emit(this.currentPage);
-    this.setPreviousPages();
-    this.setNextPages();
+    this.setPages();
+  }
+
+  setEmptyPages(): void {
+    this.nextPages = [];
+    this.previousPages = [];
   }
 
   private setNextPages(): void {
-    this.nextPages = [];
     this.nextPages = this.addPage('next', this.nextPages);
   }
 
   private setPreviousPages(): void {
-    this.previousPages = [];
     this.previousPages = this.addPage('previous', this.previousPages);
   }
 
@@ -53,7 +77,7 @@ export class PaginatorComponent implements OnInit {
 
   isPagesFull(type: AddOperation, current: PageArray[]): boolean {
     const currentPosition = this.getCurrentPosition(type, current);
-    return current.length === MAX_SHOWN_PAGES || (type === 'next' ? currentPosition >= this.totalPages : currentPosition <= 1);
+    return current.length === this.maxShownPages || (type === 'next' ? currentPosition >= this.totalPages : currentPosition <= 1);
   }
 
   getCurrentPosition(type: AddOperation, current: PageArray[]): number {

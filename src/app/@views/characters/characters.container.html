@@ -5,6 +5,7 @@
     class="characters__paginator"
     [totalItems]="totalCharacters"
     [maxItemPerPage]="charactersPerPage"
+    [currentPage]="currentPage"
     (onPageChange)="handlePageChange($event)"
   ></bb-fm-paginator>
   <bb-fm-character-list

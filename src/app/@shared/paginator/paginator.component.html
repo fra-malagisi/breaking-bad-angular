@@ -1,4 +1,4 @@
-<div class="paginator">
+<div class="paginator" *ngIf="breakpoint$ | async">
   <bb-fm-paginator-element *ngFor="let page of previousPages"
                            [pageNumber]="page"
                            (onClick)="handlePageClick($event)"

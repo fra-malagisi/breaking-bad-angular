@@ -8,5 +8,5 @@ import { faBars } from '@fortawesome/free-solid-svg-icons';
 })
 export class BurgerButtonComponent {
   @Output() buttonClicked: EventEmitter<void> = new EventEmitter<void>();
-  faBars = faBars;
+  public faBars = faBars;
 }

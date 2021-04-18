@@ -1,7 +1,7 @@
-import {ChangeDetectionStrategy, ChangeDetectorRef, Component, EventEmitter, Input, OnDestroy, OnInit, Output} from '@angular/core';
+import {ChangeDetectionStrategy, ChangeDetectorRef, Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {BreakpointObserver, Breakpoints} from '@angular/cdk/layout';
-import {takeUntil, tap} from 'rxjs/operators';
-import {noop, Subject} from 'rxjs';
+import {tap} from 'rxjs/operators';
+import {Observable} from 'rxjs';
 
 type AddOperation = 'previous' | 'next';
 export type PageArray = string | number;
@@ -13,16 +13,16 @@ export type PageArray = string | number;
   styleUrls: ['paginator.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class PaginatorComponent implements OnInit, OnDestroy {
+export class PaginatorComponent implements OnInit {
   @Input() totalItems = 1;
   @Input() maxItemPerPage!: number;
   @Input() currentPage = 1;
   @Output() onPageChange = new EventEmitter<number>();
   public totalPages!: number;
   public previousPages: PageArray[] = [];
+  public breakpoint$!: Observable<any>;
   public nextPages: PageArray[] = [];
   private maxShownPages = 3;
-  private _onDestroy$ = new Subject();
 
   constructor(
     private breakpointObserver: BreakpointObserver,
@@ -31,18 +31,13 @@ export class PaginatorComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.setTotalPages();
-    this.breakpointObserver.observe([Breakpoints.Handset]).pipe(
-      takeUntil(this._onDestroy$),
+    this.breakpoint$ = this.breakpointObserver.observe([Breakpoints.Handset]).pipe(
      tap(({matches}) => {
        this.maxShownPages = matches ? 1 : 3;
        this.setPages();
        this.cdRef.detectChanges();
      })
-    ).subscribe(noop);
-  }
-
-  ngOnDestroy(): void {
-    this._onDestroy$.next();
+    );
   }
 
   setPages(): void {
@@ -52,7 +47,6 @@ export class PaginatorComponent implements OnInit, OnDestroy {
   }
 
   private setTotalPages(): void {
-    debugger
     this.totalPages =  Math.ceil(this.totalItems / this.maxItemPerPage);
   }
 
@@ -100,7 +94,6 @@ export class PaginatorComponent implements OnInit, OnDestroy {
     if (this.isStartOrEnd(type, current)) {
       return current;
     }
-    debugger
     return type === 'next' ? [...current, '...', this.totalPages] : [1, '...', ...current];
   }
 

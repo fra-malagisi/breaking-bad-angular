@@ -6,7 +6,6 @@ import {Observable} from 'rxjs';
 type AddOperation = 'previous' | 'next';
 export type PageArray = string | number;
 
-
 @Component({
   selector: 'bb-fm-paginator',
   templateUrl: 'paginator.component.html',

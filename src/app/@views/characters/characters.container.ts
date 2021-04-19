@@ -1,9 +1,9 @@
 import {ChangeDetectionStrategy, Component, OnInit} from '@angular/core';
-import {CharacterService} from '../../@services/character.service';
 import {Observable} from 'rxjs';
 import {ActivatedRoute, Params, Router} from '@angular/router';
 import {switchMap, tap} from 'rxjs/operators';
 import {ICharacter} from './character.interface';
+import {CharacterFacade} from '../../@services/character/character.facade';
 
 @Component({
   selector: 'bb-fm-characters',
@@ -16,10 +16,10 @@ export class CharactersContainer implements OnInit {
   public characters$: Observable<ICharacter[]> | undefined;
   public charactersPerPage = 4;
   public currentPage !: number;
-  public totalCharacters$ = this.characterService.totalCharacters$;
+  public totalCharacters$ = this.characterFacade.totalCharacters$;
 
   constructor(
-    private characterService: CharacterService,
+    private characterFacade: CharacterFacade,
     private activatedRoute: ActivatedRoute,
     private router: Router
   ) {}
@@ -30,7 +30,7 @@ export class CharactersContainer implements OnInit {
         this.currentPage = page ?? 1;
         this.currentPage = Number.parseInt(this.currentPage.toString(), 10);
       }),
-      switchMap(({page}) => this.characterService.getPageCaharacters(page, this.charactersPerPage)));
+      switchMap(({page}) => this.characterFacade.getPageCharacters(page, this.charactersPerPage)));
   }
 
   handlePageChange(page: number): void {

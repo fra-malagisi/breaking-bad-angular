@@ -20,5 +20,4 @@ export class PaginatorElementComponent {
   isDots(): boolean {
     return this.pageNumber === '...';
   }
-
 }

@@ -1,6 +1,6 @@
 import {ChangeDetectionStrategy, Component, OnInit} from '@angular/core';
 import {CharacterService} from '../../@services/character.service';
-import {Observable, of} from 'rxjs';
+import {Observable} from 'rxjs';
 import {ActivatedRoute, Params, Router} from '@angular/router';
 import {switchMap, tap} from 'rxjs/operators';
 import {ICharacter} from './character.interface';
@@ -16,6 +16,7 @@ export class CharactersContainer implements OnInit {
   public characters$: Observable<ICharacter[]> | undefined;
   public charactersPerPage = 4;
   public currentPage !: number;
+  public totalCharacters$ = this.characterService.totalCharacters$;
 
   constructor(
     private characterService: CharacterService,
@@ -30,10 +31,6 @@ export class CharactersContainer implements OnInit {
         this.currentPage = Number.parseInt(this.currentPage.toString(), 10);
       }),
       switchMap(({page}) => this.characterService.getPageCaharacters(page, this.charactersPerPage)));
-  }
-
-  getTotalCharacters(): Observable<number> {
-    return this.characterService.totalCharacters$;
   }
 
   handlePageChange(page: number): void {

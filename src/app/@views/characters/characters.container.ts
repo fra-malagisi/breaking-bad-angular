@@ -1,8 +1,8 @@
 import {ChangeDetectionStrategy, Component, OnInit} from '@angular/core';
 import {CharacterService} from '../../@services/character.service';
-import {combineLatest, Observable} from 'rxjs';
+import {Observable, of} from 'rxjs';
 import {ActivatedRoute, Params, Router} from '@angular/router';
-import {map, shareReplay, tap} from 'rxjs/operators';
+import {switchMap, tap} from 'rxjs/operators';
 import {ICharacter} from './character.interface';
 
 @Component({
@@ -14,7 +14,6 @@ import {ICharacter} from './character.interface';
 export class CharactersContainer implements OnInit {
 
   public characters$: Observable<ICharacter[]> | undefined;
-  public totalCharacters!: number;
   public charactersPerPage = 4;
   public currentPage !: number;
 
@@ -25,17 +24,16 @@ export class CharactersContainer implements OnInit {
   ) {}
 
   ngOnInit(): void {
-     this.characters$ = combineLatest([
-      this.characterService.getAllCharacters().pipe(shareReplay()),
-      this.activatedRoute.queryParams
-    ]).pipe(
-      tap(([characters, {page}]) => {
-        this.totalCharacters = characters.length;
+    this.characters$ = this.activatedRoute.queryParams.pipe(
+      tap(({page}) => {
         this.currentPage = page ?? 1;
         this.currentPage = Number.parseInt(this.currentPage.toString(), 10);
       }),
-       map(([characters, {page}]) => this.getCharactersForPage(characters, page))
-    );
+      switchMap(({page}) => this.characterService.getPageCaharacters(page, this.charactersPerPage)));
+  }
+
+  getTotalCharacters(): Observable<number> {
+    return this.characterService.totalCharacters$;
   }
 
   handlePageChange(page: number): void {
@@ -47,10 +45,5 @@ export class CharactersContainer implements OnInit {
         queryParams,
         queryParamsHandling: 'merge'
       });
-  }
-
-  getCharactersForPage(characters: ICharacter[], page: number): ICharacter[] {
-    const startLimit = ((page ?? 1) - 1) * this.charactersPerPage;
-    return characters.slice(startLimit, startLimit + this.charactersPerPage);
   }
 }

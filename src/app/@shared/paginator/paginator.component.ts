@@ -1,4 +1,14 @@
-import {ChangeDetectionStrategy, ChangeDetectorRef, Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  ChangeDetectorRef,
+  Component,
+  EventEmitter,
+  Input,
+  OnChanges,
+  OnInit,
+  Output,
+  SimpleChanges
+} from '@angular/core';
 import {BreakpointObserver, Breakpoints} from '@angular/cdk/layout';
 import {tap} from 'rxjs/operators';
 import {Observable} from 'rxjs';
@@ -12,9 +22,10 @@ export type PageArray = string | number;
   styleUrls: ['paginator.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class PaginatorComponent implements OnInit {
-  @Input() totalItems = 1;
+export class PaginatorComponent implements OnInit, OnChanges {
+
   @Input() maxItemPerPage!: number;
+  @Input() totalItems = 1;
   @Input() currentPage = 1;
   @Output() onPageChange = new EventEmitter<number>();
   public totalPages!: number;
@@ -29,20 +40,26 @@ export class PaginatorComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.setTotalPages();
     this.breakpoint$ = this.breakpointObserver.observe([Breakpoints.Handset]).pipe(
      tap(({matches}) => {
        this.maxShownPages = matches ? 1 : 3;
        this.setPages();
-       this.cdRef.detectChanges();
      })
     );
   }
 
+  ngOnChanges(changes: SimpleChanges): void {
+    const {currentPage, totalItems} = changes;
+    currentPage && !currentPage.firstChange && this.setPages();
+    totalItems && !totalItems.firstChange && this.setPages();
+  }
+
   setPages(): void {
+    this.setTotalPages();
     this.setEmptyPages();
     this.setPreviousPages();
     this.setNextPages();
+    this.cdRef.detectChanges();
   }
 
   private setTotalPages(): void {
@@ -52,7 +69,6 @@ export class PaginatorComponent implements OnInit {
   handlePageClick(page: PageArray): void {
     this.currentPage = Number.parseInt(page as string, 10);
     this.onPageChange.emit(this.currentPage);
-    this.setPages();
   }
 
   setEmptyPages(): void {

@@ -14,8 +14,8 @@ export class CharacterService {
 
   constructor(private http: HttpClient) {}
 
-  getAllCharacters(): Observable<ICharacter[]> {
-    return this.http.get<ICharacter[]>(`${this.basePath}`).pipe(
+  getAllCharacters(filters: string = ''): Observable<ICharacter[]> {
+    return this.http.get<ICharacter[]>(`${this.basePath}?${filters}`).pipe(
       shareReplay(),
       catchError(err => of([]))
     );

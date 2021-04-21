@@ -1,7 +1,6 @@
 export interface ICharacter {
   char_id: number;
   name: string;
-  birthday: string;
   occupation: string[];
   img: string;
   status: string;
@@ -9,4 +8,12 @@ export interface ICharacter {
   appearance: number[];
   portrayed: string;
   category: string;
+}
+
+export interface ICharacterFilter {
+  name: string;
+  birthday: string;
+  occupation: string;
+  status: string;
+  nickname: string;
 }

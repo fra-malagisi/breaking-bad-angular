@@ -1,5 +1,8 @@
 <h2 class="characters__title">Characters</h2>
-<bb-fm-caracter-filter class="characters__filters"></bb-fm-caracter-filter>
+<bb-fm-caracter-filter
+  class="characters__filters"
+  (onFiltersEdited)="handleFilterChange($event)"
+></bb-fm-caracter-filter>
 <ng-container *ngIf="(characters$ | async) as characters">
   <bb-fm-paginator
     *ngIf="(totalCharacters$ | async) as totalCharacters"

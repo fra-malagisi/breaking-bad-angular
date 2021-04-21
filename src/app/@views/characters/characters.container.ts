@@ -2,7 +2,7 @@ import {ChangeDetectionStrategy, Component, OnInit} from '@angular/core';
 import {Observable} from 'rxjs';
 import {ActivatedRoute, Params, Router} from '@angular/router';
 import {switchMap, tap} from 'rxjs/operators';
-import {ICharacter} from './character.interface';
+import {ICharacter, ICharacterFilter} from './character.interface';
 import {CharacterFacade} from '../../@services/character/character.facade';
 
 @Component({
@@ -26,15 +26,24 @@ export class CharactersContainer implements OnInit {
 
   ngOnInit(): void {
     this.characters$ = this.activatedRoute.queryParams.pipe(
-      tap(({page}) => {
+      tap(({page, name}) => {
         this.currentPage = page ?? 1;
         this.currentPage = Number.parseInt(this.currentPage.toString(), 10);
       }),
-      switchMap(({page}) => this.characterFacade.getPageCharacters(page, this.charactersPerPage)));
+      switchMap(({page, name}) => this.characterFacade.getPageCharacters(page, this.charactersPerPage, {name})));
   }
 
   handlePageChange(page: number): void {
     const queryParams: Params = { page };
+    this.navigate(queryParams);
+  }
+
+  handleFilterChange(characterFilters: ICharacterFilter): void {
+    const queryParams: Params = {page: 1, ...characterFilters};
+    this.navigate(queryParams);
+  }
+
+  navigate(queryParams: Params): void {
     this.router.navigate(
       [],
       {

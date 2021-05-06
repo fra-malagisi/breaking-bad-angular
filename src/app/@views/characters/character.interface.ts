@@ -8,6 +8,7 @@ export interface ICharacter {
   appearance: number[];
   portrayed: string;
   category: string;
+  birthday: string;
 }
 
 export interface ICharacterFilter {
